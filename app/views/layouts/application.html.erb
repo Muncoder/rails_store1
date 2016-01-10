@@ -7,8 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<header>
+		<%= render 'shared/header' %>
+	</header>
 
-<%= yield %>
+	<div class="container">
+
+		<% flash.each do |name,msg| %>
+			<%= content_tag(:div, msg, class: 'alert-#{name}') %>
+		<% end %>
+
+		<%= yield %>	
+	</div>
+
+	<footer>
+		
+	</footer>
 
 </body>
 </html>
