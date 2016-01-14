@@ -1,0 +1,20 @@
+<h1 class="label label-info">Cart in the session</h1>
+
+<table class="table table-bordered table-hover">
+	<% @cart.items.each do |item| %>
+		<tr>
+			<td> <%= link_to ">", add_quantity_cart_path(item.product.id), method: :post, class: "btn btn-info" %> |   <%= item.quantity %> | <%= link_to "<", remove_quantity_cart_path(item.product.id), method: :post, class: "btn btn-info" %> </td>
+
+			<td> <%= item.product.name %> </td>
+			<td> <%= image_tag item.product.image.url(:thumb) %> </td>
+			<td> <%= item.product.price %> </td>
+			<td> <%= item.total_price %> </td>
+			<td> <%= link_to "Remove", remove_cart_path(item.product.id), method: :post, class: "btn btn-xs btn-danger" %> </td>
+
+		</tr>
+	<% end %>
+</table>
+
+<p>
+	<%= @cart.total_price %>
+</p>

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_filter :initialize_cart
 
   # GET /products
   # GET /products.json
@@ -59,6 +60,11 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def kill_session
+    reset_session
+    redirect_to root_path, notice: "Cart is cleared. You can make new Cart"
   end
 
   private

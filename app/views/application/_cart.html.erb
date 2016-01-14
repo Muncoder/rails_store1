@@ -1,0 +1,7 @@
+<% if @cart %>
+	<% if @cart.empty? %>
+		Your cart is empty
+	<% else %>
+		<%= link_to "Show My Cart", cart_path %> 
+	<% end %>
+<% end %>
