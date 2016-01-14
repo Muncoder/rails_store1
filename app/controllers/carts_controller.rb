@@ -35,4 +35,8 @@ class CartsController < ApplicationController
 		redirect_to :back, notice: "Session is cleared"
 	end
 
+	def checkout
+		@order_form = OrderForm.new user: User.new
+	end
+
 end

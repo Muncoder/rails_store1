@@ -1,0 +1,41 @@
+<h1>Checkout</h1>
+
+<h3>You are checking out following items</h3>
+
+<table class="table table-condensed table-bordered table-striped">
+	<% @cart.items.each do |item| %>
+		<tr>
+			<td> <%= item.quantity %> </td>
+			<td> <%= image_tag item.product.image.url(:thumb) %> </td>
+			<td> <%= item.product.name %> </td>
+			<td> <%= item.product.price %> </td>
+			<td> <%= item.total_price %> </td>
+		</tr>
+	<% end %>	
+	<tr>
+		<td colspan="4" class="text-right">Total price :</td>
+		<td> <%= @cart.total_price %> </td>
+
+	</tr>
+
+</table>
+
+<%= form_for @order_form, url: orders_path do |f| %>
+	
+	<%= render "orders/errors" %>
+
+	<h3>Some of your personal details</h3>
+	<%= f.fields_for :user, f.object.user do |u| %>
+		<div class="form-group">
+			<%= u.text_field :name, placeholder: "Name", class: "form-control input-lg" %>
+			<%= u.text_field :email, placeholder: "Email", class: "form-control" %>
+			<span class="help-block">This will help you to track your order more effectively</span>
+			<%= u.text_field :address, placeholder: "Address", class: "form-control" %>
+			<%= u.text_field :postal_code, placeholder: "Postal code / Zipcode", class: "form-control" %>
+			<%= u.text_field :city, placeholder: "City", class: "form-control" %>
+			<%= u.country_select :country, { priority_countries: [ "GB", "US", "DE", "ES", "PT" ] }, { class: "form-control"} %>
+			<%= u.text_field :phone, placeholder: "Phone", class: "form-control" %>
+		</div>
+		<%= f.submit "Place Order", class: "btn btn-primary" %>
+	<% end %>
+<% end %>

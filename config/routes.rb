@@ -10,8 +10,10 @@ Rails.application.routes.draw do
 
   	get "kill", path: "kill"
 
-
+    get :checkout
   end
+
+  resources :orders, only: [ :index, :show, :create ]
 
   root "products#index"
 end
